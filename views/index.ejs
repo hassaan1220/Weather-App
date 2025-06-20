@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #83a4d4, #b6fbff);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .weather-box {
+            background-color: #ffffffc9;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        button.btn {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        button.btn:hover {
+            background-color: #0056b3;
+        }
+
+        .result-box {
+            background-color: #ffffffc9;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 500px;
+            margin: 30px auto 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container text-center mt-5">
+        <h1 class="mb-4 text-white">🌦️ Weather App</h1>
+        <div class="weather-box">
+            <form action="/weather" method="get">
+                <input type="text" name="city" placeholder="Enter a city" required>
+                <button class="btn btn-sm" type="submit">Get Weather</button>
+            </form>
+            <br>
+            <div class="container p-2">
+                <% if (weather) { %>
+                    <h2>Weather in <%= weather.name %>
+                    </h2>
+                    <p><strong>Temperature:</strong> <%= weather.main.temp %> °C</p>
+                    <p><strong>Feels like:</strong> <%= weather.main.feels_like %> °C</p>
+                    <p><strong>Pressure:</strong> <%= weather.main.pressure %> hPa </p>
+                    <p><strong>Humidity:</strong> <%= weather.main.humidity %> % </p>
+                    <p><strong>Condition:</strong> <%= weather.weather[0].description %></p>
+                <% } %>
+
+                <% if (error) { %>
+                    <p style="color: red;">
+                        <%= error %>
+                    </p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
